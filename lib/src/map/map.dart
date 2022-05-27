@@ -80,6 +80,24 @@ class MapControllerImpl implements MapController {
 
   @override
   Stream<MapEvent> get mapEventStream => _mapEventSink.stream;
+
+  @override
+  LatLng? pointToLatLng(CustomPoint localPoint) {
+    if (_state.originalSize == null) {
+      return null;
+    }
+
+    final width = _state.originalSize!.x;
+    final height = _state.originalSize!.y;
+
+    final localPointCenterDistance =
+        CustomPoint((width / 2) - localPoint.x, (height / 2) - localPoint.y);
+    final mapCenter =
+        _state.options.crs.latLngToPoint(_state.center, _state.zoom);
+
+    final point = mapCenter - localPointCenterDistance;
+    return _state.options.crs.pointToLatLng(point, _state.zoom);
+  }
 }
 
 class MapState {

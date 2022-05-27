@@ -17,6 +17,8 @@ import 'package:flutter_map/src/plugins/plugin.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
 
+import 'flutter_map.dart';
+
 export 'package:flutter_map/src/core/center_zoom.dart';
 export 'package:flutter_map/src/core/point.dart';
 export 'package:flutter_map/src/geo/crs/crs.dart';
@@ -138,6 +140,8 @@ abstract class MapController {
   LatLng get center;
 
   LatLngBounds? get bounds;
+
+  LatLng? pointToLatLng(CustomPoint point);
 
   double get zoom;
 
